@@ -18,6 +18,7 @@
 - **Separate `iLvl` and `GS` columns** — The old GS field is now labeled `iLvl`, and a new `GS` column tracks actual GearScore.
 - **Actual GearScore calculation** — Inspect now calculates WotLK-style GearScore from equipped gear instead of reusing average item level.
 - **Shared score syncing** — `iLvl` and `GS` stay in sync across Class, All, and Raid tabs, including copy/paste and drag reorder paths.
+- **Addon code split into modules** — Shared bootstrap, data tables, layout constants, needs helpers, and raid row refresh logic now live in separate Lua files loaded by the TOC.
 - **All tab action fixes** — Delete, add-to-group, and add-to-raid actions now operate on the visible character.
 - **Deletion cleanup** — Removing a character also clears matching needs and raid roster references.
 - **Invite flow fixes** — Invite buttons now reflect whether you are inviting a raid, inviting a group, or have an active invite run.
@@ -200,6 +201,24 @@ To share data between accounts, copy:
 ```text
 WoW/WTF/Account/ACCOUNTNAME/SavedVariables/LichborneTracker.lua
 ```
+
+---
+
+## Code Organization
+
+The addon still loads through `LichborneTracker.toc`, but the shared logic is no longer concentrated in one large file.
+
+| File | Responsibility |
+| --- | --- |
+| `LichborneTracker/Core.lua` | Saved-variable bootstrap, legacy migration, raid roster access |
+| `LichborneTracker/Layout.lua` | Shared layout constants and column sizing |
+| `LichborneTracker/Data.lua` | Static lookup tables for specs, classes, tiers, roles, and raid labels |
+| `LichborneTracker/GearScore.lua` | WotLK-style GearScore calculation helpers |
+| `LichborneTracker/Needs.lua` | Needs data helpers and limits |
+| `LichborneTracker/Helpers.lua` | Shared row, tab, and tracker helper functions |
+| `LichborneTracker/NeedsUI.lua` | Needs picker and needs-cell UI behavior |
+| `LichborneTracker/RaidRows.lua` | Raid roster sorting and refresh behavior |
+| `LichborneTracker/LichborneTracker.lua` | Remaining frame construction, event wiring, and top-level addon flow |
 
 ---
 

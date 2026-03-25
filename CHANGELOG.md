@@ -15,6 +15,7 @@ All notable changes to Lichborne are documented in this file.
 - Updated Class, Raid, and All tabs to show both `iLvl` and `GS` values.
 - Updated sorting so Gear Score sorts now use the true `GS` value instead of average item level.
 - Preserved real GearScore values across All tab groups, raid rosters, copy/paste, drag-reorder, and reset paths.
+- Split shared addon code out of `LichborneTracker.lua` into dedicated modules for core state, layout constants, static data, GearScore helpers, needs handling, shared UI helpers, and raid row refresh logic.
 
 ### Fixed
 
