@@ -872,11 +872,11 @@ local function BuildPickerIfNeeded()
                 pf.title:SetText("|cffC69B3ANeeds: |r|cffffff00"..needsPickerOwner.."|r")
             end
         end)
-        btn:SetScript("OnClick",function()
+        btn:SetScript("OnClick",function(_, mouseButton)
             if not needsPickerOwner or needsPickerOwner=="" then return end
             local k=slot.key
             local cur=GetNeeds(needsPickerOwner)[k]
-            if arg1=="RightButton" then SetNeed(needsPickerOwner,k,false)
+            if mouseButton=="RightButton" then SetNeed(needsPickerOwner,k,false)
             else SetNeed(needsPickerOwner,k,not cur) end
             local needs2=GetNeeds(needsPickerOwner)
             local count2=0; for _ in pairs(needs2) do count2=count2+1 end
@@ -896,10 +896,10 @@ local function BuildPickerIfNeeded()
     end
     -- Close when mouse leaves the picker (with a small grace period)
     pf.closeTimer = 0
-    pf:SetScript("OnUpdate",function()
+    pf:SetScript("OnUpdate",function(_, elapsed)
         if not pf:IsShown() then return end
         if not MouseIsOver(pf) then
-            pf.closeTimer = (pf.closeTimer or 0) + arg1
+            pf.closeTimer = (pf.closeTimer or 0) + elapsed
             if pf.closeTimer > 0.3 then
                 ClosePicker()
             end
@@ -908,8 +908,8 @@ local function BuildPickerIfNeeded()
         end
     end)
     -- ESC closes picker but not the main frame
-    pf:SetScript("OnKeyDown", function()
-        if arg1 == "ESCAPE" then ClosePicker() end
+    pf:SetScript("OnKeyDown", function(_, key)
+        if key == "ESCAPE" then ClosePicker() end
     end)
     pf:EnableKeyboard(true)
     needsPicker=pf
@@ -954,10 +954,10 @@ local function MakeNeedsCell(parent, xOff, rowH, getCharName, hovTex, overrideW)
         ic:SetPoint("LEFT",cf,"LEFT",2+(si-1)*(NEEDS_ICON_SIZE+2),0)
         ic:Hide(); cf.icons[si]=ic
     end
-    cf:SetScript("OnClick",function()
+    cf:SetScript("OnClick",function(_, mouseButton)
         local cname=getCharName()
         if not cname or cname=="" then return end
-        if arg1=="RightButton" then
+        if mouseButton=="RightButton" then
             if LichborneTrackerDB.needs then LichborneTrackerDB.needs[cname:lower()]={} end
             RefreshAllNeedsCells(); ClosePicker(); return
         end
@@ -1333,8 +1333,8 @@ local function BuildRows(parent, yStart)
             end
             GameTooltip:Hide()
         end)
-        dragBtn:SetScript("OnMouseDown", function()
-            if arg1 == "LeftButton" and row.dbIndex then
+        dragBtn:SetScript("OnMouseDown", function(_, mouseButton)
+            if mouseButton == "LeftButton" and row.dbIndex then
                 local data = LichborneTrackerDB.rows[row.dbIndex]
                 if data and data.name and data.name ~= "" then
                     dragSourceRow = row
@@ -1440,9 +1440,9 @@ local function BuildRows(parent, yStart)
         nb:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=16,edgeSize=8,insets={left=2,right=2,top=2,bottom=2}})
         nb:SetBackdropColor(0.05, 0.07, 0.14, 0.8)
         nb:SetBackdropBorderColor(0.15, 0.22, 0.38, 0.7)
-        nb:SetScript("OnEnterPressed", function() this:ClearFocus() end)
-        nb:SetScript("OnTabPressed", function() this:ClearFocus() end)
-        nb:SetScript("OnEscapePressed", function() this:ClearFocus() end)
+        nb:SetScript("OnEnterPressed", function(self) self:ClearFocus() end)
+        nb:SetScript("OnTabPressed", function(self) self:ClearFocus() end)
+        nb:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
         row.nameBox = nb
         nb:SetScript("OnEnter", function() row.hov:SetTexture(0.78, 0.61, 0.23, 0.12) end)
         nb:SetScript("OnLeave", function()
@@ -1459,9 +1459,9 @@ local function BuildRows(parent, yStart)
         gsb:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=16,edgeSize=8,insets={left=1,right=1,top=1,bottom=1}})
         gsb:SetBackdropColor(0.05, 0.07, 0.14, 1)
         gsb:SetBackdropBorderColor(0.12, 0.18, 0.30, 0.8)
-        gsb:SetScript("OnEnterPressed", function() this:ClearFocus() end)
-        gsb:SetScript("OnTabPressed", function() this:ClearFocus() end)
-        gsb:SetScript("OnEscapePressed", function() this:ClearFocus() end)
+        gsb:SetScript("OnEnterPressed", function(self) self:ClearFocus() end)
+        gsb:SetScript("OnTabPressed", function(self) self:ClearFocus() end)
+        gsb:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
         row.gsBox = gsb
         gsb:SetScript("OnEnter", function() row.hov:SetTexture(0.78, 0.61, 0.23, 0.12) end)
         gsb:SetScript("OnLeave", function()
@@ -1500,11 +1500,11 @@ local function BuildRows(parent, yStart)
             gb:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=16,edgeSize=8,insets={left=1,right=1,top=1,bottom=1}})
             gb:SetBackdropColor(0.05, 0.07, 0.14, 1)
             gb:SetBackdropBorderColor(0.12, 0.18, 0.30, 0.8)
-            gb:SetScript("OnEnterPressed", function() this:ClearFocus() end)
-            gb:SetScript("OnTabPressed", function() this:ClearFocus() end)
-            gb:SetScript("OnEscapePressed", function() this:ClearFocus() end)
-            gb:SetScript("OnMouseUp", function()
-                if arg1 == "RightButton" then
+            gb:SetScript("OnEnterPressed", function(self) self:ClearFocus() end)
+            gb:SetScript("OnTabPressed", function(self) self:ClearFocus() end)
+            gb:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
+            gb:SetScript("OnMouseUp", function(_, mouseButton)
+                if mouseButton == "RightButton" then
                     gb:SetText("")
                     gb:SetTextColor(1, 1, 1)
                     if row.dbIndex then
@@ -2092,7 +2092,7 @@ local function BuildRaidFrame(parent, fl)
         mb:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight","ADD")
         local mblbl=mb:CreateFontString(nil,"OVERLAY","GameFontNormalSmall"); mblbl:SetAllPoints(mb); mblbl:SetJustifyH("CENTER")
         local hex=string.format("|cff%02x%02x%02x",math.floor(c.r*255),math.floor(c.g*255),math.floor(c.b*255))
-        mblbl:SetText(hex..(TIER_LABELS[t] or "T"..t).."|r")
+        mblbl:SetText(hex..(TIER_LABELS[t] or ("T"..t)).."|r")
         mb:SetScript("OnClick",function()
             LichborneTrackerDB.raidTier = t
             UpdateTierDD()
@@ -2491,8 +2491,8 @@ local function BuildRaidFrame(parent, fl)
             if not raidDragSource then dragTex2:SetVertexColor(0.2,0.3,0.5,0) end
             GameTooltip:Hide()
         end)
-        dragBtn:SetScript("OnMouseDown",function()
-            if arg1 == "LeftButton" then
+        dragBtn:SetScript("OnMouseDown",function(_, mouseButton)
+            if mouseButton == "LeftButton" then
                 local roster2, _ = GetCurrentRoster()
                 local d2 = roster2[i]
                 if d2 and d2.name and d2.name ~= "" then
@@ -2886,8 +2886,8 @@ local function BuildRaidFrame(parent, fl)
         local inviteFrame = CreateFrame("Frame")
         activeInviteFrame = inviteFrame
         UpdateInviteButtons()
-        inviteFrame:SetScript("OnUpdate",function()
-            waitTime = waitTime + arg1
+        inviteFrame:SetScript("OnUpdate",function(_, elapsed)
+            waitTime = waitTime + elapsed
 
             if phase == "logout_remove" then
                 if waitTime < 0.1 then return end
@@ -3064,8 +3064,8 @@ local function BuildRaidFrame(parent, fl)
         local grpFrame = CreateFrame("Frame")
         activeInviteFrame = grpFrame
         UpdateInviteButtons()
-        grpFrame:SetScript("OnUpdate",function()
-            waited = waited + arg1
+        grpFrame:SetScript("OnUpdate",function(_, elapsed)
+            waited = waited + elapsed
             if waited < 0.8 then return end
             waited = 0
             if invIdx > #names then
@@ -4075,8 +4075,8 @@ local function OnFirstShow()
         local waitTime = 0
         local addGroupFrame = CreateFrame("Frame")
         SetScanActive(true)
-        addGroupFrame:SetScript("OnUpdate", function()
-            waitTime = waitTime + arg1
+        addGroupFrame:SetScript("OnUpdate", function(_, elapsed)
+            waitTime = waitTime + elapsed
             if waitTime < 0.15 then return end  -- small gap between each
             waitTime = 0
 
@@ -4173,8 +4173,8 @@ local function OnFirstShow()
         end
         local addIdx, addWait, addedCount, skippedCount = 1, 0, 0, 0
         local agFrame = CreateFrame("Frame")
-        agFrame:SetScript("OnUpdate", function()
-            addWait = addWait + arg1
+        agFrame:SetScript("OnUpdate", function(_, elapsed)
+            addWait = addWait + elapsed
             if addWait < 0.15 then return end
             addWait = 0
             if addIdx > #toProcess then
@@ -4318,8 +4318,8 @@ local function OnFirstShow()
             local idx,elapsed,inspecting = 1,0,false
             local gFrame = CreateFrame("Frame")
             activeInspectFrame = gFrame
-            gFrame:SetScript("OnUpdate", function()
-                elapsed = elapsed + arg1
+            gFrame:SetScript("OnUpdate", function(_, delta)
+                elapsed = elapsed + delta
                 if inspecting then if elapsed < 2.5 then return end; inspecting=false; elapsed=0 end
                 if idx > #units then
                     gFrame:SetScript("OnUpdate",nil)
@@ -4371,8 +4371,8 @@ local function OnFirstShow()
             local idx,elapsed,inspecting = 1,0,false
             local sFrame = CreateFrame("Frame")
             activeInspectFrame = sFrame
-            sFrame:SetScript("OnUpdate", function()
-                elapsed = elapsed + arg1
+            sFrame:SetScript("OnUpdate", function(_, delta)
+                elapsed = elapsed + delta
                 if inspecting then if elapsed < 3.0 then return end; inspecting=false; elapsed=0 end
                 if idx > #units then
                     sFrame:SetScript("OnUpdate",nil)
@@ -4649,8 +4649,8 @@ local function OnFirstShow()
         local waited = 0
         local phase = "kick"
         local disbFrame = CreateFrame("Frame")
-        disbFrame:SetScript("OnUpdate", function()
-            waited = waited + arg1
+        disbFrame:SetScript("OnUpdate", function(_, elapsed)
+            waited = waited + elapsed
             if phase == "kick" then
                 if waited < 0.2 then return end
                 waited = 0
@@ -4691,7 +4691,7 @@ local function OnFirstShow()
     infoText:SetText(
         "|cffd4af37LICHBORNE|r\n" ..
         "|cffd4af37Gear Tracker & Raid Planner|r\n" ..
-        "|cffd4af37v1.70|r\n" ..
+        "|cffd4af37v1.7.1|r\n" ..
         "\n" ..
         "|cffaaaaaaQuestions & Support:|r\n" ..
         "|cffd4af37lichborne.wow|r\n" ..
@@ -4782,7 +4782,7 @@ local function BuildFrameBG()
     title:SetPoint("TOPLEFT", f, "TOPLEFT", 10, -12)
     title:SetPoint("TOPRIGHT", f, "TOPRIGHT", -280, -12)
     title:SetJustifyH("LEFT")
-    title:SetText("|cffC69B3ALICHBORNE|r  —  Gear Tracker  |cffaaaaaa v1.70|r")
+    title:SetText("|cffC69B3ALICHBORNE|r  —  Gear Tracker  |cffaaaaaa v1.7.1|r")
     local closeBtn = CreateFrame("Button", "LichborneCloseBtn", f, "UIPanelCloseButton")
     closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", 2, 2)
     closeBtn:SetScript("OnClick", function() f:Hide() end)
@@ -4915,7 +4915,8 @@ end
 
 -- ── Minimap button ────────────────────────────────────────────
 local LichborneMinimapIcon = LibStub("LibDBIcon-1.0", true)
-local miniLDB = LibStub("LibDataBroker-1.1"):NewDataObject("LichborneTracker", {
+local LichborneDataBroker = LibStub("LibDataBroker-1.1", true)
+local miniLDB = LichborneDataBroker and LichborneDataBroker:NewDataObject("LichborneTracker", {
     type = "launcher",
     icon = "Interface\\Icons\\INV_Misc_Note_01",
     OnClick = function(self, btn)
@@ -4940,14 +4941,14 @@ table.insert(_G["UISpecialFrames"], "LichborneTrackerFrame")
 do
     local initFrame = CreateFrame("Frame")
     initFrame:RegisterEvent("ADDON_LOADED")
-    initFrame:SetScript("OnEvent", function()
-        if arg1 == "LichborneTracker" then
+    initFrame:SetScript("OnEvent", function(_, _, addonName)
+        if addonName == "LichborneTracker" then
             MigrateGearField()
             -- Register minimap icon with its own SavedVariable (so position persists correctly)
             if type(LichborneMinimapIconDB) ~= "table" then
                 LichborneMinimapIconDB = {}
             end
-            if LichborneMinimapIcon then
+            if LichborneMinimapIcon and miniLDB then
                 LichborneMinimapIcon:Register("LichborneTracker", miniLDB, LichborneMinimapIconDB)
                 LichborneMinimapIcon:Refresh("LichborneTracker", LichborneMinimapIconDB)
             end
@@ -5061,9 +5062,9 @@ end
 
 local specWait = 0
 local specFrame = CreateFrame("Frame")
-specFrame:SetScript("OnUpdate", function()
+specFrame:SetScript("OnUpdate", function(_, elapsed)
     if not LichborneSpecTarget then return end
-    specWait = specWait + arg1
+    specWait = specWait + elapsed
     if specWait >= 2.0 then
         specWait = 0
         CalcSpec()
@@ -5266,9 +5267,9 @@ end
 
 local inspectFrame = CreateFrame("Frame")
 local inspectWait = 0
-inspectFrame:SetScript("OnUpdate", function()
+inspectFrame:SetScript("OnUpdate", function(_, elapsed)
     if not LichborneInspectTarget then return end
-    inspectWait = inspectWait + arg1
+    inspectWait = inspectWait + elapsed
     if inspectWait >= 1.5 then
         inspectWait = 0
         CalcGS()

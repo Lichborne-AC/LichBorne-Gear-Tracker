@@ -2,11 +2,12 @@
 ## Title: |cffC69B3ALichborne|r Gear Tracker
 ## Notes: Guild raid gear tracker with tier color system
 ## Author: Lichborne
-## Version: 1.70
+## Version: 1.7.1
 ## SavedVariables: LichborneTrackerDB, LichborneMinimapIconDB
 
 # Libraries
 libs/LibStub/LibStub.lua
+libs/CallbackHandler-1.0/CallbackHandler-1.0.lua
 libs/LibDataBroker-1.1/LibDataBroker-1.1.lua
 libs/LibDBIcon-1.0/LibDBIcon-1.0.lua
 

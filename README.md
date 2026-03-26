@@ -1,7 +1,8 @@
 # LICHBORNE — Gear Tracker
-**A World of Warcraft WotLK 3.3.5a Addon for AzerothCore Private Servers**
 
-**Version 1.70**
+A World of Warcraft WotLK 3.3.5a Addon for AzerothCore Private Servers
+
+Version: 1.7.1
 
 ---
 
@@ -15,6 +16,8 @@
 
 ## Recent Changes
 
+- **Addon load compatibility fix** — Bundled `CallbackHandler-1.0` is now loaded before `LibDataBroker-1.1`, and startup no longer hard-fails if the minimap broker stack is unavailable.
+- **3.3.5a-safe UI handlers** — Replaced fragile implicit handler globals like `this` and `arg1` with explicit script arguments to reduce conflicts with other addons.
 - **Gear Score average bar in Class tabs** — Each class tab now displays an average GearScore bar alongside the existing average iLvl bar.
 - **Item quality colors on gear slots** — Gear slot icons in the class tab are now color-coded to match WoW item quality (grey, white, green, blue, purple, orange).
 - **Buttons disabled during scans** — Get Gear Score, Get Group Spec, and Invite Raid buttons are now disabled while a scan or invite sequence is running to prevent conflicts.

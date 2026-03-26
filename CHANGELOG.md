@@ -4,6 +4,8 @@ All notable changes to Lichborne are documented in this file.
 
 ## Unreleased
 
+## 1.7.1 - 2026-03-26
+
 ### Added
 
 - Added a separate `GS` column for actual GearScore alongside the existing `iLvl` column.
@@ -27,3 +29,5 @@ All notable changes to Lichborne are documented in this file.
 - Fixed invite button visibility so Invite Raid, Invite Group, and Stop Invite match the active state.
 - Fixed raid row drag/drop so reordering no longer drops stored GearScore values.
 - Fixed inspect refresh so empty slots clear stale item-level values instead of leaving old data behind.
+- Fixed addon startup compatibility by loading `CallbackHandler-1.0` before `LibDataBroker-1.1`.
+- Fixed multiple UI script handlers to use explicit event arguments instead of fragile implicit globals such as `this` and `arg1`.
