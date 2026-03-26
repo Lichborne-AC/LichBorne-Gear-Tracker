@@ -2,7 +2,7 @@
 
 A World of Warcraft WotLK 3.3.5a Addon for AzerothCore Private Servers
 
-Version: 1.7.1
+Version: 1.7.2
 
 ---
 
@@ -16,6 +16,7 @@ Version: 1.7.1
 
 ## Recent Changes
 
+- **Add Group scan compatibility fix** — Group scan buttons now bind the local scan-state helper correctly on 3.3.5a, preventing `SetScanActive` nil errors reported through addon hook stacks such as BugSack or ElvUI.
 - **Addon load compatibility fix** — Bundled `CallbackHandler-1.0` is now loaded before `LibDataBroker-1.1`, and startup no longer hard-fails if the minimap broker stack is unavailable.
 - **3.3.5a-safe UI handlers** — Replaced fragile implicit handler globals like `this` and `arg1` with explicit script arguments to reduce conflicts with other addons.
 - **Gear Score average bar in Class tabs** — Each class tab now displays an average GearScore bar alongside the existing average iLvl bar.

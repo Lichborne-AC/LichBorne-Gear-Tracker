@@ -4,7 +4,7 @@ All notable changes to Lichborne are documented in this file.
 
 ## Unreleased
 
-## 1.7.1 - 2026-03-26
+## 1.7.2 - 2026-03-26
 
 ### Added
 
@@ -21,6 +21,7 @@ All notable changes to Lichborne are documented in this file.
 
 ### Fixed
 
+- Fixed Add Group scan actions on 3.3.5a so UI handlers bind the local scan-state helper instead of calling a missing global `SetScanActive` when addon hook stacks are present.
 - Fixed inspect slot mapping so equipped item levels are read from the correct gear slots.
 - Fixed All tab actions so add, delete, and sync operations act on the displayed character.
 - Fixed tracker deletion cleanup so removing a character also clears roster and needs references.

@@ -3985,6 +3985,8 @@ local function OnFirstShow()
     end)
 
     -- ── Add Group button ───────────────────────────────────────
+    local SetScanActive
+
     local addGroupBtn = CreateFrame("Button", "LichborneAddGroupBtn", f)
     addGroupBtn:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 175, 112)
     addGroupBtn:SetSize(155, 28)
@@ -4273,7 +4275,7 @@ local function OnFirstShow()
     local activeInspectFrame = nil  -- shared by GS and Spec scans; Stop button kills it
 
     -- Disable/enable all buttons except Stop during a scan
-    local function SetScanActive(active)
+    SetScanActive = function(active)
         SetButtonsLocked(active)
         -- Also lock invite buttons during scans (they aren't Stop Invite here)
         local inviteRaid = _G["LichborneInviteRaidBtn"]
@@ -4691,7 +4693,7 @@ local function OnFirstShow()
     infoText:SetText(
         "|cffd4af37LICHBORNE|r\n" ..
         "|cffd4af37Gear Tracker & Raid Planner|r\n" ..
-        "|cffd4af37v1.7.1|r\n" ..
+        "|cffd4af37v1.7.2|r\n" ..
         "\n" ..
         "|cffaaaaaaQuestions & Support:|r\n" ..
         "|cffd4af37lichborne.wow|r\n" ..
@@ -4782,7 +4784,7 @@ local function BuildFrameBG()
     title:SetPoint("TOPLEFT", f, "TOPLEFT", 10, -12)
     title:SetPoint("TOPRIGHT", f, "TOPRIGHT", -280, -12)
     title:SetJustifyH("LEFT")
-    title:SetText("|cffC69B3ALICHBORNE|r  —  Gear Tracker  |cffaaaaaa v1.7.1|r")
+    title:SetText("|cffC69B3ALICHBORNE|r  —  Gear Tracker  |cffaaaaaa v1.7.2|r")
     local closeBtn = CreateFrame("Button", "LichborneCloseBtn", f, "UIPanelCloseButton")
     closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", 2, 2)
     closeBtn:SetScript("OnClick", function() f:Hide() end)
