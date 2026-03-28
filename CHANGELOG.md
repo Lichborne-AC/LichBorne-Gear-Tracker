@@ -2,7 +2,14 @@
 
 All notable changes to Lichborne are documented in this file.
 
-## Unreleased
+
+### Fixed
+
+## v1.73
+- Fixed minimap icon not appearing on fresh installs without other broker addons
+- Replaced bundled libs with compatible versions for wider client compatibility
+- Moved lib registration into ADDON_LOADED for reliability
+- Changed minimap icon to book texture (INV_Misc_Book_11)
 
 
 ## 1.72 - 2026-03-26
