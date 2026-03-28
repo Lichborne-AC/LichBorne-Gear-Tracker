@@ -2,6 +2,13 @@
 
 All notable changes to Lichborne are documented in this file.
 
+### Fixed
+
+- Fixed minimap icon not appearing on machines where bundled libs failed to load silently
+- Added native fallback minimap button (copied from DBM) that activates automatically when LibDBIcon is unavailable
+- Replaced bundled libs with DBM-compatible versions for wider client support
+- Moved lib registration into ADDON_LOADED for correct load order
+- Changed minimap icon to book texture (INV_Misc_Book_11)
 
 ### Fixed
 
