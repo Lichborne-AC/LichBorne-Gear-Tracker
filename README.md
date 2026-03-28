@@ -31,7 +31,7 @@
 
 ### Class Tabs
 
-Each of the 10 playable classes has its own tab with up to 54 roster slots across 3 pages. Each character row tracks:
+Each of the 10 playable classes has its own tab with up to 54 roster slots (per class) across 3 pages. Each character row tracks:
 
 - Spec icon — auto-detected from talent inspection.  Can be manually changed.
 - Name — editable, colored by class
